@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RiftStart · The Fastest Way Into Riftbound TCG</title>
+<meta name="description" content="A one-stop hub for new Riftbound players: preconstructed deck comparison, LGS locator, online play tools, curated YouTube guides, and a beginner FAQ." />
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#121826; --panel-2:#1a2236;
+    --line:#2a3550; --text:#e8ecf4; --muted:#9aa4bf;
+    --gold:#c8a055; --blue:#4aa8ff; --red:#ff5c5c; --green:#59d185;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  header{padding:48px 24px 32px;text-align:center;background:radial-gradient(ellipse at top,#1a2540 0%,var(--bg) 70%);border-bottom:1px solid var(--line)}
+  header h1{margin:0 0 12px;font-size:34px;letter-spacing:.5px}
+  header .tagline{color:var(--muted);font-size:16px;max-width:640px;margin:0 auto}
+  .pathbar{display:flex;justify-content:center;gap:8px;margin-top:24px;flex-wrap:wrap}
+  .pathbar span{padding:6px 14px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--muted)}
+  .pathbar span b{color:var(--gold);margin-right:6px}
+  nav{position:sticky;top:0;background:rgba(10,14,26,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:10}
+  nav ul{display:flex;gap:4px;justify-content:center;list-style:none;padding:10px;margin:0;flex-wrap:wrap}
+  nav a{display:block;padding:8px 14px;color:var(--muted);border-radius:6px;font-size:14px}
+  nav a:hover{background:var(--panel);color:var(--text);text-decoration:none}
+  main{max-width:1100px;margin:0 auto;padding:40px 24px}
+  section{margin-bottom:56px}
+  section h2{font-size:24px;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+  section h2::before{content:"";width:4px;height:22px;background:var(--gold);border-radius:2px}
+  section .lead{color:var(--muted);margin:0 0 20px;font-size:15px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--gold);font-weight:600;background:var(--panel-2);position:sticky;top:0}
+  tr:hover td{background:rgba(74,168,255,.04)}
+  .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;margin-right:4px}
+  .tag.aggro{background:rgba(255,92,92,.15);color:var(--red)}
+  .tag.midrange{background:rgba(200,160,85,.15);color:var(--gold)}
+  .tag.control{background:rgba(74,168,255,.15);color:var(--blue)}
+  .tag.combo{background:rgba(89,209,133,.15);color:var(--green)}
+  .diff{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--line);margin-right:2px}
+  .diff.on{background:var(--gold)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .tool{padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:8px;transition:transform .15s}
+  .tool:hover{transform:translateY(-2px);border-color:var(--gold)}
+  .tool h4{margin:0 0 6px;font-size:15px}
+  .tool p{margin:0 0 10px;color:var(--muted);font-size:13px}
+  .tool .meta{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.5px}
+  .video-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+  .video{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:transform .15s,border-color .15s}
+  .video:hover{transform:translateY(-2px);border-color:var(--gold)}
+  .video a.thumb{display:block;aspect-ratio:16/9;position:relative;background:#000 center/cover no-repeat;text-decoration:none}
+  .video a.thumb::after{
+    content:"▶";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:38px;background:rgba(0,0,0,.25);transition:background .15s
+  }
+  .video a.thumb:hover::after{background:rgba(0,0,0,.1)}
+  .video .badge{
+    position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.8);color:#fff;
+    font-size:11px;padding:2px 6px;border-radius:3px;z-index:1
+  }
+  .video .body{padding:12px 14px}
+  .video h4{margin:0 0 4px;font-size:14px;line-height:1.4}
+  .video h4 a{color:var(--text)}
+  .video h4 a:hover{color:var(--gold);text-decoration:none}
+  .video .by{font-size:12px;color:var(--muted)}
+  details{border:1px solid var(--line);border-radius:6px;margin-bottom:8px;background:var(--panel)}
+  details[open]{border-color:var(--gold)}
+  summary{padding:14px 16px;cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::after{content:"+";color:var(--gold);font-size:18px}
+  details[open] summary::after{content:"−"}
+  details p{margin:0;padding:0 16px 16px;color:var(--muted);font-size:14px}
+  .locator-wrap{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+  .locator-wrap iframe{width:100%;height:560px;border:0;display:block;background:#fff}
+  .fallback{display:flex;gap:12px;padding:16px;flex-wrap:wrap;border-top:1px solid var(--line);background:var(--panel-2)}
+  .fallback a{padding:8px 14px;background:var(--gold);color:#1a1a1a;border-radius:6px;font-size:13px;font-weight:500}
+  .fallback a.sec{background:transparent;color:var(--text);border:1px solid var(--line)}
+  footer{padding:24px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:40px}
+  @media(max-width:640px){
+    header h1{font-size:26px}
+    table{font-size:13px}
+    th,td{padding:8px 6px}
+    .locator-wrap iframe{height:480px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>RiftStart</h1>
+  <p class="tagline">The fastest way into Riftbound — Riot's official League of Legends TCG. Launched October 31, 2025.</p>
+  <div class="pathbar">
+    <span><b>①</b> Read the FAQ</span>
+    <span><b>②</b> Pick a precon</span>
+    <span><b>③</b> Find your LGS</span>
+    <span><b>④</b> Play online &amp; learn</span>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#decks">Precon Decks</a></li>
+    <li><a href="#lgs">Store Locator</a></li>
+    <li><a href="#online">Online Tools</a></li>
+    <li><a href="#videos">Video Guides</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Beginner FAQ</h2>
+  <p class="lead">Five questions almost every new player asks. Answers follow the official Core Rules and the March 2026 tournament update.</p>
+
+  <details open>
+    <summary>What exactly is Riftbound, and how does it differ from Hearthstone or Magic?</summary>
+    <p>Riftbound is a physical TCG developed by Riot Games and published with UVS Games. It supports 2–4 players, and matches revolve around sending your champion, units, and spells to capture battlefields. The first player to reach 8 Conquest points wins. Unlike MTG's land system, Riftbound uses a rune pool that refills on a fixed schedule, and unlike Hearthstone it supports multi-player free-for-all and team formats right out of the box.</p>
+  </details>
+
+  <details>
+    <summary>How much does it cost to get started?</summary>
+    <p>The lowest entry point is a single Champion Deck (about $25–30). Each one is fully preconstructed around a single champion and ready to play straight out of the box. Two friends with one deck each can start playing immediately. If you want to explore deckbuilding, add a Proving Grounds 2-player starter ($40) or a Booster Box ($120+).</p>
+  </details>
+
+  <details>
+    <summary>Which sets exist, and where should I start?</summary>
+    <p>As of spring 2026 there are three major releases: <b>Origins</b> (OGN, the launch set), <b>Proving Grounds</b> / Spiritforged (SFD), and <b>Unleashed</b> (UNL, the newest expansion featuring Vi and Vex among others). New players can simply grab the most recent Champion Deck from Unleashed — all sets are cross-compatible.</p>
+  </details>
+
+  <details>
+    <summary>Can I play online without a local opponent?</summary>
+    <p>Yes. Community tools like Riftscribe, RiftCore, and the Riftbot Discord bot cover card databases, deckbuilding, and match tracking. Runes &amp; Rift runs free weekly online tournaments every Saturday. There's no official client yet, but between Tabletop Simulator and community platforms the online scene is already mature.</p>
+  </details>
+
+  <details>
+    <summary>Seven cards were banned in March 2026 — does that affect beginners?</summary>
+    <p>No. The ban list targets oppressive cards in the competitive metagame, and every card inside an official Champion Deck remains fully legal. For your first few months, metagame shifts don't matter. If you want to track the current banned list, check riftbound.gg's announcements page.</p>
+  </details>
+</section>
+
+<!-- DECKS -->
+<section id="decks">
+  <h2>Preconstructed Deck Comparison</h2>
+  <p class="lead">Seven official Champion Decks side by side, sorted from most beginner-friendly to most demanding. More dots means higher complexity.</p>
+  <div class="card" style="padding:0;overflow-x:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Deck</th>
+          <th>Set</th>
+          <th>Style</th>
+          <th>Complexity</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Garen</b><br><span style="color:var(--muted);font-size:12px">Might of Demacia</span></td>
+          <td>Origins</td>
+          <td><span class="tag midrange">Midrange</span></td>
+          <td><span class="diff on"></span><span class="diff"></span><span class="diff"></span></td>
+          <td>Total TCG newcomers — forgiving tempo and stable play patterns</td>
+        </tr>
+        <tr>
+          <td><b>Annie</b><br><span style="color:var(--muted);font-size:12px">Dark Child</span></td>
+          <td>Origins</td>
+          <td><span class="tag aggro">Aggro</span></td>
+          <td><span class="diff on"></span><span class="diff"></span><span class="diff"></span></td>
+          <td>Players who prefer fast games and direct pressure</td>
+        </tr>
+        <tr>
+          <td><b>Jinx</b><br><span style="color:var(--muted);font-size:12px">Loose Cannon</span></td>
+          <td>Origins</td>
+          <td><span class="tag aggro">Aggro</span></td>
+          <td><span class="diff on"></span><span class="diff on"></span><span class="diff"></span></td>
+          <td>The best deck for learning initiative and tempo concepts</td>
+        </tr>
+        <tr>
+          <td><b>Lee Sin</b><br><span style="color:var(--muted);font-size:12px">Blind Monk</span></td>
+          <td>Origins</td>
+          <td><span class="tag combo">Combo</span></td>
+          <td><span class="diff on"></span><span class="diff on"></span><span class="diff"></span></td>
+          <td>Players who enjoy combos and timing-based decisions</td>
+        </tr>
+        <tr>
+          <td><b>Master Yi</b><br><span style="color:var(--muted);font-size:12px">Wuju Bladesman</span></td>
+          <td>Spiritforged</td>
+          <td><span class="tag midrange">Midrange+</span></td>
+          <td><span class="diff on"></span><span class="diff on"></span><span class="diff"></span></td>
+          <td>Tier-1 deck in the November 2025 metagame</td>
+        </tr>
+        <tr>
+          <td><b>Viktor</b><br><span style="color:var(--muted);font-size:12px">Herald of the Arcane</span></td>
+          <td>Origins / Spiritforged</td>
+          <td><span class="tag control">Control</span></td>
+          <td><span class="diff on"></span><span class="diff on"></span><span class="diff on"></span></td>
+          <td>Players with prior control experience who enjoy long-game planning</td>
+        </tr>
+        <tr>
+          <td><b>Vi / Vex</b><br><span style="color:var(--muted);font-size:12px">Unleashed duo</span></td>
+          <td>Unleashed</td>
+          <td><span class="tag midrange">Midrange</span> <span class="tag control">Control</span></td>
+          <td><span class="diff on"></span><span class="diff on"></span><span class="diff"></span></td>
+          <td>Newest environment — best for aligning with current online play</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="color:var(--muted);font-size:13px;margin-top:12px">Data compiled from the Eneba Starter Guide, TCGplayer's November 2025 Tier article, and Rift Mana decklists. Always check Riot Merch Store, TCGplayer, or your local game store for current pricing and availability.</p>
+</section>
+
+<!-- LGS -->
+<section id="lgs">
+  <h2>Local Game Store Locator</h2>
+  <p class="lead">Embedded directly from UVS Games' official Find a Riftbound Store page. If it fails to load, use the buttons below.</p>
+  <div class="locator-wrap">
+    <iframe src="https://uvsgames.com/find-a-riftbound-store/" loading="lazy" title="Find a Riftbound Store"></iframe>
+    <div class="fallback">
+      <a href="https://uvsgames.com/?_gl=1*wa164z*_up*MQ..*_ga*NTQwODA2OTQwLjE3NzczODIzOTc.*_ga_9J852YFGH2*czE3NzczODIzOTUkbzEkZzEkdDE3NzczODI0MjMkajMyJGwwJGgw" target="_blank" rel="noopener">Open UVS Official Site</a>
+      <a class="sec" href="https://riftbound.leagueoflegends.com/en-us/card-gallery/" target="_blank" rel="noopener">Open Riot Card Gallery</a>
+      <a class="sec" href="https://riftbound.leagueoflegends.com/en-us/news/announcements/riftbounds-upcoming-official-events/" target="_blank" rel="noopener">Upcoming Official Events</a>
+    </div>
+  </div>
+</section>
+
+<!-- ONLINE -->
+<section id="online">
+  <h2>Online Play &amp; Community Tools</h2>
+  <p class="lead">Curated from the rift.tools community directory — covering deckbuilding, rulings, collection tracking, and tournaments.</p>
+  <div class="grid">
+    <div class="tool">
+      <div class="meta">Card DB / Builder</div>
+      <h4><a href="https://riftscribe.com" target="_blank" rel="noopener">Riftscribe</a></h4>
+      <p>Community-driven card database with an open API. The data backbone powering most third-party tools.</p>
+    </div>
+    <div class="tool">
+      <div class="meta">All-in-One Companion</div>
+      <h4><a href="https://riftbound.gg" target="_blank" rel="noopener">Riftbound.gg</a></h4>
+      <p>News, tier lists, deckbuilder, and price tracking in one place — think MTGGoldfish for Riftbound.</p>
+    </div>
+    <div class="tool">
+      <div class="meta">Discord Bot</div>
+      <h4><a href="https://rift.tools" target="_blank" rel="noopener">Riftbot</a></h4>
+      <p>Look up cards, build decks, and manage your collection without leaving your Discord server.</p>
+    </div>
+    <div class="tool">
+      <div class="meta">Online Tournaments</div>
+      <h4><a href="https://runesandrift.com" target="_blank" rel="noopener">Runes &amp; Rift</a></h4>
+      <p>Free weekly Saturday tournaments, monthly Cash Cups, and seasonal Invitationals — open to newcomers.</p>
+    </div>
+    <div class="tool">
+      <div class="meta">Rules Judge</div>
+      <h4><a href="https://rift.tools" target="_blank" rel="noopener">RiftJudge</a></h4>
+      <p>An AI rules judge on Discord that cites the official rulebook for every answer.</p>
+    </div>
+    <div class="tool">
+      <div class="meta">Community Hub</div>
+      <h4><a href="https://www.reddit.com/r/riftboundtcg/" target="_blank" rel="noopener">r/riftboundtcg</a></h4>
+      <p>The largest English-speaking Riftbound community — unboxings, decklists, and metagame talk all live here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <h2>YouTube Video Guides</h2>
+  <p class="lead">From a 15-minute rules crash course to prerelease card picks, ordered in the sequence we recommend watching. Click a thumbnail to open the video on YouTube (embedding is disabled by several uploaders, so all links open in a new tab).</p>
+  <div class="video-list">
+
+    <div class="video">
+      <a class="thumb" href="https://www.youtube.com/watch?v=sPvBt2mroDY" target="_blank" rel="noopener"
+         style="background-image:url('https://i.ytimg.com/vi/sPvBt2mroDY/hqdefault.jpg')">
+         <span class="badge">15 min</span>
+      </a>
+      <div class="body">
+        <h4><a href="https://www.youtube.com/watch?v=sPvBt2mroDY" target="_blank" rel="noopener">Learn to Play Riftbound in Less Than 15 Minutes</a></h4>
+        <p class="by">Good Time Society · Rules crash course</p>
+      </div>
+    </div>
+
+    <div class="video">
+      <a class="thumb" href="https://www.youtube.com/watch?v=DYtSAD4rKu4" target="_blank" rel="noopener"
+         style="background-image:url('https://i.ytimg.com/vi/DYtSAD4rKu4/hqdefault.jpg')">
+         <span class="badge">Deep Dive</span>
+      </a>
+      <div class="body">
+        <h4><a href="https://www.youtube.com/watch?v=DYtSAD4rKu4" target="_blank" rel="noopener">How to Play Riftbound for Beginners</a></h4>
+        <p class="by">A longer rules walkthrough to solidify the basics</p>
+      </div>
+    </div>
+
+    <div class="video">
+      <a class="thumb" href="https://www.youtube.com/watch?v=OfsU_FmWuKA" target="_blank" rel="noopener"
+         style="background-image:url('https://i.ytimg.com/vi/OfsU_FmWuKA/hqdefault.jpg')">
+         <span class="badge">Demo Game</span>
+      </a>
+      <div class="body">
+        <h4><a href="https://www.youtube.com/watch?v=OfsU_FmWuKA" target="_blank" rel="noopener">Riftbound Quick Tutorial for Beginners with Viktor</a></h4>
+        <p class="by">A sample match using the Viktor precon</p>
+      </div>
+    </div>
+
+    <div class="video">
+      <a class="thumb" href="https://www.youtube.com/watch?v=uPFiBdKZptE" target="_blank" rel="noopener"
+         style="background-image:url('https://i.ytimg.com/vi/uPFiBdKZptE/hqdefault.jpg')">
+         <span class="badge">Zero to One</span>
+      </a>
+      <div class="body">
+        <h4><a href="https://www.youtube.com/watch?v=uPFiBdKZptE" target="_blank" rel="noopener">How To Play Riftbound — A Beginner's Guide</a></h4>
+        <p class="by">Visual, illustrated walkthrough for complete newcomers</p>
+      </div>
+    </div>
+
+    <div class="video">
+      <a class="thumb" href="https://www.youtube.com/watch?v=DNATtoUzKec" target="_blank" rel="noopener"
+         style="background-image:url('https://i.ytimg.com/vi/DNATtoUzKec/hqdefault.jpg')">
+         <span class="badge">Event Prep</span>
+      </a>
+      <div class="body">
+        <h4><a href="https://www.youtube.com/watch?v=DNATtoUzKec" target="_blank" rel="noopener">10 Tips to Have FUN and WIN your Pre-Rift Event</a></h4>
+        <p class="by">Good Time Society · Must-watch before your first in-person event</p>
+      </div>
+    </div>
+
+    <div class="video">
+    <div class="video">
+      <a class="thumb" href="https://www.youtube.com/watch?v=tkY_5ZVZd2U" target="_blank" rel="noopener"
+         style="background-image:url('https://i.ytimg.com/vi/tkY_5ZVZd2U/hqdefault.jpg')">
+         <span class="badge">Sealed</span>
+      </a>
+      <div class="body">
+        <h4><a href="https://www.youtube.com/watch?v=tkY_5ZVZd2U" target="_blank" rel="noopener">The BEST CARDS for Unleashed Pre-Rift</a></h4>
+        <p class="by">Top picks for the latest expansion's Sealed format</p>
+      </div>
+    </div>
+
+    <div class="video">
+      <a class="thumb" href="https://www.youtube.com/watch?v=FO7ueRzPl3E" target="_blank" rel="noopener"
+         style="background-image:url('https://i.ytimg.com/vi/FO7ueRzPl3E/hqdefault.jpg')">
+         <span class="badge">Unboxing</span>
+      </a>
+      <div class="body">
+        <h4><a href="https://www.youtube.com/watch?v=FO7ueRzPl3E" target="_blank" rel="noopener">Opening Riftbound's Newest Set EARLY! Unleashed Vault</a></h4>
+        <p class="by">A box opening to build intuition for the new card pool</p>
+      </div>
+    </div>
+
+  </div>
+  <p style="color:var(--muted);font-size:13px;margin-top:16px">For ongoing coverage, three creators stand out: <b>Moe "Emotional"</b> (deep strategy), <b>ChallengerTCG</b> (deckbuilding tutorials), and <b>the-silent-knight</b> (metagame and market watch). Their channels can be found directly on YouTube by name.</p>
+</section>
+
+</main>
+
+<footer>
+  RiftStart · Unofficial · Aggregated from Riftbound official announcements, UVS Games, rift.tools, riftbound.gg, TCGplayer, and the broader community.<br>
+  Riftbound is a trademark of Riot Games and UVS Games. This site exists purely as a navigation aid for new players.
+</footer>
+
+<script>
+  // Smooth scroll for in-page nav
+  document.querySelectorAll('nav a').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const id=a.getAttribute('href');
+      if(id.startsWith('#')){
+        e.preventDefault();
+        document.querySelector(id).scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+  });
+
+  // iframe load timeout: highlight fallback buttons if the locator doesn't render in 5s
+  const lgs = document.querySelector('.locator-wrap iframe');
+  let loaded = false;
+  lgs.addEventListener('load', ()=> loaded = true);
+  setTimeout(()=>{
+    if(!loaded){
+      const fb = document.querySelector('.fallback');
+      fb.style.background = 'rgba(255,92,92,.1)';
+      fb.insertAdjacentHTML('afterbegin',
+        '<div style="width:100%;color:#ff9c9c;font-size:13px;margin-bottom:4px">The locator could not be embedded (the target site likely blocks iframes). Use the buttons below to open it in a new tab.</div>');
+    }
+  }, 5000);
+</script>
+
+</body>
+</html>
