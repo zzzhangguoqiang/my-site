@@ -18,9 +18,9 @@
   header{padding:48px 24px 32px;text-align:center;background:radial-gradient(ellipse at top,#1a2540 0%,var(--bg) 70%);border-bottom:1px solid var(--line)}
   header h1{margin:0 0 12px;font-size:34px;letter-spacing:.5px}
   header .tagline{color:var(--muted);font-size:16px;max-width:640px;margin:0 auto}
-  。pathbar{display:flex;justify-content:center;gap:8px;margin-top:24px;flex-wrap:wrap}
-  。pathbar span{padding:6px 14px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--muted)}
-  。pathbar span b{color:var(--gold);margin-right:6px}
+  .pathbar{display:flex;justify-content:center;gap:8px;margin-top:24px;flex-wrap:wrap}
+  .pathbar span{padding:6px 14px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--muted)}
+  .pathbar span b{color:var(--gold);margin-right:6px}
   nav{position:sticky;top:0;background:rgba(10,14,26,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:10}
   nav ul{display:flex;gap:4px;justify-content:center;list-style:none;padding:10px;margin:0;flex-wrap:wrap}
   nav a{display:block;padding:8px 14px;color:var(--muted);border-radius:6px;font-size:14px}
@@ -30,34 +30,34 @@
   section h2{font-size:24px;margin:0 0 6px;display:flex;align-items:center;gap:10px}
   section h2::before{content:"";width:4px;height:22px;background:var(--gold);border-radius:2px}
   section .lead{color:var(--muted);margin:0 0 20px;font-size:15px}
-  。card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px}
   table{width:100%;border-collapse:collapse;font-size:14px}
   th,td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
   th{color:var(--gold);font-weight:600;background:var(--panel-2);position:sticky;top:0}
   tr:hover td{background:rgba(74,168,255,.04)}
-  。tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;margin-right:4px}
-  。tag.aggro{background:rgba(255,92,92,.15);color:var(--red)}
-  。tag.midrange{background:rgba(200,160,85,.15);color:var(--gold)}
-  。tag.control{background:rgba(74,168,255,.15);color:var(--blue)}
-  。tag.combo{background:rgba(89,209,133,.15);color:var(--green)}
-  。diff{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--line);margin-right:2px}
-  。diff.于{background:var(--gold)}
-  。grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-  。tool{padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:8px;transition:transform .15s}
-  。tool:hover{transform:translateY(-2px);border-color:var(--gold)}
-  。tool h4{margin:0 0 6px;font-size:15px}
-  。tool p{margin:0 0 10px;color:var(--muted);font-size:13px}
-  。tool .meta{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.5px}
-  。video-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
-  。video{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:transform .15s,border-color .15s}
-  。video:hover{transform:translateY(-2px);border-color:var(--gold)}
-  。video a.thumb{display:block;aspect-ratio:16/9;position:relative;background:#000 center/cover no-repeat;text-decoration:none}
-  。video a.thumb::after{
+  .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;margin-right:4px}
+  .tag.aggro{background:rgba(255,92,92,.15);color:var(--red)}
+  .tag.midrange{background:rgba(200,160,85,.15);color:var(--gold)}
+  .tag.control{background:rgba(74,168,255,.15);color:var(--blue)}
+  .tag.combo{background:rgba(89,209,133,.15);color:var(--green)}
+  .diff{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--line);margin-right:2px}
+  .diff.on{background:var(--gold)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .tool{padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:8px;transition:transform .15s}
+  .tool:hover{transform:translateY(-2px);border-color:var(--gold)}
+  .tool h4{margin:0 0 6px;font-size:15px}
+  .tool p{margin:0 0 10px;color:var(--muted);font-size:13px}
+  .tool .meta{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.5px}
+  .video-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+  .video{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:transform .15s,border-color .15s}
+  .video:hover{transform:translateY(-2px);border-color:var(--gold)}
+  .video a.thumb{display:block;aspect-ratio:16/9;position:relative;background:#000 center/cover no-repeat;text-decoration:none}
+  .video a.thumb::after{
     content:"▶";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
     color:#fff;font-size:38px;background:rgba(0,0,0,.25);transition:background .15s
   }
-  。video a.thumb:hover::after{background:rgba(0,0,0,.1)}
-  。video .badge{
+  .video a.thumb:hover::after{background:rgba(0,0,0,.1)}
+  .video .badge{
     position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.8);color:#fff;
     font-size:11px;padding:2px 6px;border-radius:3px;z-index:1
   }
@@ -72,17 +72,36 @@
   summary::after{content:"+";color:var(--gold);font-size:18px}
   details[open] summary::after{content:"−"}
   details p{margin:0;padding:0 16px 16px;color:var(--muted);font-size:14px}
-  .locator-wrap{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
-  .locator-wrap iframe{width:100%;height:560px;border:0;display:block;background:#fff}
-  .fallback{display:flex;gap:12px;padding:16px;flex-wrap:wrap;border-top:1px solid var(--line);background:var(--panel-2)}
-  .fallback a{padding:8px 14px;background:var(--gold);color:#1a1a1a;border-radius:6px;font-size:13px;font-weight:500}
-  .fallback a.sec{background:transparent;color:var(--text);border:1px solid var(--line)}
+
+  /* LGS 定位器 */
+  .lgs-box{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .lgs-hero{padding:32px 24px;text-align:center;background:radial-gradient(ellipse at center,#1a2540 0%,var(--panel) 70%)}
+  .lgs-hero p{color:var(--muted);font-size:14px;margin:0 0 20px;max-width:480px;margin-left:auto;margin-right:auto}
+  .btn-locate{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--gold);color:#1a1a1a;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .15s}
+  .btn-locate:hover{opacity:.85}
+  .btn-locate:disabled{opacity:.5;cursor:not-allowed}
+  .lgs-status{margin-top:16px;font-size:13px;color:var(--muted);min-height:20px}
+  .lgs-result{display:none;padding:20px 24px;border-top:1px solid var(--line);background:var(--panel-2)}
+  .lgs-result.show{display:block}
+  .lgs-result h4{margin:0 0 12px;font-size:15px;color:var(--text)}
+  .lgs-result h4 span{color:var(--gold)}
+  .lgs-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .lgs-actions a{padding:9px 16px;border-radius:6px;font-size:13px;font-weight:500;text-decoration:none}
+  .lgs-actions a.primary{background:var(--gold);color:#1a1a1a}
+  .lgs-actions a.sec{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .lgs-actions a:hover{opacity:.8;text-decoration:none}
+  .lgs-fallback{padding:20px 24px;border-top:1px solid var(--line)}
+  .lgs-fallback p{color:var(--muted);font-size:13px;margin:0 0 12px}
+  .lgs-fallback .manual-links{display:flex;gap:10px;flex-wrap:wrap}
+  .lgs-fallback .manual-links a{padding:8px 14px;border:1px solid var(--line);border-radius:6px;font-size:13px;color:var(--text)}
+  .lgs-fallback .manual-links a:hover{border-color:var(--gold);text-decoration:none}
+  .lgs-tip{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+
   footer{padding:24px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:40px}
   @media(max-width:640px){
     header h1{font-size:26px}
     table{font-size:13px}
     th,td{padding:8px 6px}
-    .locator-wrap iframe{height:480px}
   }
 </style>
 </head>
@@ -216,13 +235,35 @@
 <!-- LGS -->
 <section id="lgs">
   <h2>Local Game Store Locator</h2>
-  <p class="lead">Embedded directly from UVS Games' official Find a Riftbound Store page. If it fails to load, use the buttons below.</p>
-  <div class="locator-wrap">
-    <iframe src="https://uvsgames.com/find-a-riftbound-store/" loading="lazy" title="Find a Riftbound Store"></iframe>
-    <div class="fallback">
-      <a href="https://uvsgames.com/?_gl=1*wa164z*_up*MQ..*_ga*NTQwODA2OTQwLjE3NzczODIzOTc.*_ga_9J852YFGH2*czE3NzczODIzOTUkbzEkZzEkdDE3NzczODI0MjMkajMyJGwwJGgw" target="_blank" rel="noopener">Open UVS Official Site</a>
-      <a class="sec" href="https://riftbound.leagueoflegends.com/en-us/card-gallery/" target="_blank" rel="noopener">Open Riot Card Gallery</a>
-      <a class="sec" href="https://riftbound.leagueoflegends.com/en-us/news/announcements/riftbounds-upcoming-official-events/" target="_blank" rel="noopener">Upcoming Official Events</a>
+  <p class="lead">Click the button below to auto-detect your location and find the nearest Riftbound store. No account or API key required.</p>
+
+  <div class="lgs-box">
+    <div class="lgs-hero">
+      <p>We'll use your browser's location to find the closest stores carrying Riftbound. Your coordinates are never stored or sent to our servers.</p>
+      <button class="btn-locate" id="locateBtn" onclick="locateUser()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+          <circle cx="12" cy="12" r="9" opacity=".3"/>
+        </svg>
+        Find Stores Near Me
+      </button>
+      <div class="lgs-status" id="lgsStatus"></div>
+    </div>
+
+    <div class="lgs-result" id="lgsResult">
+      <h4>Stores near <span id="lgsCityName"></span></h4>
+      <div class="lgs-actions" id="lgsActions"></div>
+      <p class="lgs-tip">The official locator will open with your coordinates pre-filled. Results include all stores in the Riftbound Play Network near you.</p>
+    </div>
+
+    <div class="lgs-fallback">
+      <p>Prefer to search manually or browse all stores worldwide:</p>
+      <div class="manual-links">
+        <a href="https://locator.riftbound.uvsgames.com/stores/search" target="_blank" rel="noopener">🗺 UVS Official Store Locator</a>
+        <a href="https://riftbound.leagueoflegends.com/en-us/card-gallery/" target="_blank" rel="noopener">🃏 Riot Card Gallery</a>
+        <a href="https://riftbound.leagueoflegends.com/en-us/news/announcements/riftbounds-upcoming-official-events/" target="_blank" rel="noopener">📅 Upcoming Official Events</a>
+      </div>
     </div>
   </div>
 </section>
@@ -268,7 +309,7 @@
 <!-- VIDEOS -->
 <section id="videos">
   <h2>YouTube Video Guides</h2>
-  <p class="lead">From a 15-minute rules crash course to prerelease card picks, ordered in the sequence we recommend watching. Click a thumbnail to open the video on YouTube (embedding is disabled by several uploaders, so all links open in a new tab).</p>
+  <p class="lead">From a 15-minute rules crash course to prerelease card picks, ordered in the sequence we recommend watching. Click a thumbnail to open the video on YouTube.</p>
   <div class="video-list">
 
     <div class="video">
@@ -327,7 +368,6 @@
     </div>
 
     <div class="video">
-    <div class="video">
       <a class="thumb" href="https://www.youtube.com/watch?v=tkY_5ZVZd2U" target="_blank" rel="noopener"
          style="background-image:url('https://i.ytimg.com/vi/tkY_5ZVZd2U/hqdefault.jpg')">
          <span class="badge">Sealed</span>
@@ -350,7 +390,7 @@
     </div>
 
   </div>
-  <p style="color:var(--muted);font-size:13px;margin-top:16px">For ongoing coverage, three creators stand out: <b>Moe "Emotional"</b> (deep strategy), <b>ChallengerTCG</b> (deckbuilding tutorials), and <b>the-silent-knight</b> (metagame and market watch). Their channels can be found directly on YouTube by name.</p>
+  <p style="color:var(--muted);font-size:13px;margin-top:16px">For ongoing coverage, three creators stand out: <b>Moe "Emotional"</b> (deep strategy), <b>ChallengerTCG</b> (deckbuilding tutorials), and <b>the-silent-knight</b> (metagame and market watch). Search their names directly on YouTube.</p>
 </section>
 
 </main>
@@ -361,30 +401,89 @@
 </footer>
 
 <script>
-  // Smooth scroll for in-page nav
-  document.querySelectorAll('nav a').forEach(a=>{
-    a.addEventListener('click',e=>{
-      const id=a.getAttribute('href');
-      if(id.startsWith('#')){
+  // 平滑滚动
+  document.querySelectorAll('nav a').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.startsWith('#')) {
         e.preventDefault();
-        document.querySelector(id).scrollIntoView({behavior:'smooth',block:'start'});
+        document.querySelector(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   });
 
-  // iframe load timeout: highlight fallback buttons if the locator doesn't render in 5s
-  const lgs = document.querySelector('.locator-wrap iframe');
-  let loaded = false;
-  lgs.addEventListener('load', ()=> loaded = true);
-  setTimeout(()=>{
-    if(!loaded){
-      const fb = document.querySelector('.fallback');
-      fb.style.background = 'rgba(255,92,92,.1)';
-      fb.insertAdjacentHTML('afterbegin',
-        '<div style="width:100%;color:#ff9c9c;font-size:13px;margin-bottom:4px">The locator could not be embedded (the target site likely blocks iframes). Use the buttons below to open it in a new tab.</div>');
+  // LGS 自动定位
+  function locateUser() {
+    const btn     = document.getElementById('locateBtn');
+    const status  = document.getElementById('lgsStatus');
+    const result  = document.getElementById('lgsResult');
+    const cityEl  = document.getElementById('lgsCityName');
+    const actions = document.getElementById('lgsActions');
+
+    if (!navigator.geolocation) {
+      status.textContent = 'Geolocation is not supported by your browser. Use the manual links below.';
+      return;
     }
-  }, 5000);
+
+    btn.disabled    = true;
+    btn.textContent = 'Detecting location…';
+    status.style.color = 'var(--muted)';
+    status.textContent = 'Requesting location permission…';
+
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const lat = pos.coords.latitude.toFixed(5);
+        const lng = pos.coords.longitude.toFixed(5);
+        status.textContent = 'Location found. Looking up city…';
+
+        // 反向地理编码：OpenStreetMap Nominatim（免费无 API Key）
+        let cityName = `${lat}, ${lng}`;
+        try {
+          const res  = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`,
+            { headers: { 'Accept-Language': 'en' } }
+          );
+          const data = await res.json();
+          const addr = data.address || {};
+          cityName   = addr.city || addr.town || addr.village || addr.county || addr.state || cityName;
+        } catch (_) {}
+
+        // 更新 UI
+        cityEl.textContent  = cityName;
+        status.textContent  = '';
+        btn.textContent     = '✓ Location detected';
+
+        // 拼接官方定位器 URL（带坐标参数）
+        const locatorUrl = `https://locator.riftbound.uvsgames.com/stores/search?lat=${lat}&lng=${lng}`;
+        const mapsUrl    = `https://www.google.com/maps/search/card+game+store/@${lat},${lng},13z`;
+
+        actions.innerHTML = `
+          <a class="primary" href="${locatorUrl}" target="_blank" rel="noopener">
+            Open Riftbound Store Locator →
+          </a>
+          <a class="sec" href="${mapsUrl}" target="_blank" rel="noopener">
+            Search Google Maps nearby
+          </a>
+        `;
+
+        result.classList.add('show');
+      },
+      (err) => {
+        btn.disabled = false;
+        btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="9" opacity=".3"/></svg> Find Stores Near Me`;
+        const msgs = {
+          1: 'Location permission denied. Use the manual links below to search.'，
+          2: 'Location unavailable. Please try again or use the manual links.',
+          3: 'Location request timed out. Please try again.'
+        };
+        status.style.color = '#ff9c9c';
+        status.textContent = msgs[err.code] || 'Location error. Use the manual links below.';
+      },
+      { timeout: 10000, maximumAge: 60000 }
+    );
+  }
 </script>
 
 </body>
 </html>
+
