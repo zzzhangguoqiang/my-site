@@ -11,7 +11,31 @@
     --line:#2a3550; --text:#e8ecf4; --muted:#9aa4bf;
     --gold:#c8a055; --blue:#4aa8ff; --red:#ff5c5c; --green:#59d185;
   }
-  *{box-sizing:border-box}
+  
+  /* 自定义全局滚动条 */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg); 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--line); 
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted); 
+  }
+
+  * { box-sizing: border-box; }
+  
+  /* 原生 CSS 平滑滚动 */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; 
+  }
+
   body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
   a{color:var(--blue);text-decoration:none}
   a:hover{text-decoration:underline}
@@ -21,20 +45,48 @@
   .pathbar{display:flex;justify-content:center;gap:8px;margin-top:24px;flex-wrap:wrap}
   .pathbar span{padding:6px 14px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--muted)}
   .pathbar span b{color:var(--gold);margin-right:6px}
-  nav{position:sticky;top:0;background:rgba(10,14,26,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:10}
+  
+  /* 导航栏添加底阴影 */
+  nav{
+    position:sticky;
+    top:0;
+    background:rgba(10,14,26,.85);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom:1px solid var(--line);
+    z-index:10;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
   nav ul{display:flex;gap:4px;justify-content:center;list-style:none;padding:10px;margin:0;flex-wrap:wrap}
   nav a{display:block;padding:8px 14px;color:var(--muted);border-radius:6px;font-size:14px}
   nav a:hover{background:var(--panel);color:var(--text);text-decoration:none}
+  
   main{max-width:1100px;margin:0 auto;padding:40px 24px}
   section{margin-bottom:56px}
   section h2{font-size:24px;margin:0 0 6px;display:flex;align-items:center;gap:10px}
   section h2::before{content:"";width:4px;height:22px;background:var(--gold);border-radius:2px}
   section .lead{color:var(--muted);margin:0 0 20px;font-size:15px}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px}
-  table{width:100%;border-collapse:collapse;font-size:14px}
+  
+  /* 表格移动端结构优化 */
+  .table-wrapper {
+    padding: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 600px;
+  }
+  .table-wrapper th:first-child, .table-wrapper td:first-child { padding-left: 20px; }
+  .table-wrapper th:last-child, .table-wrapper td:last-child { padding-right: 20px; }
+  
   th,td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
   th{color:var(--gold);font-weight:600;background:var(--panel-2);position:sticky;top:0}
   tr:hover td{background:rgba(74,168,255,.04)}
+  
   .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;margin-right:4px}
   .tag.aggro{background:rgba(255,92,92,.15);color:var(--red)}
   .tag.midrange{background:rgba(200,160,85,.15);color:var(--gold)}
@@ -42,21 +94,50 @@
   .tag.combo{background:rgba(89,209,133,.15);color:var(--green)}
   .diff{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--line);margin-right:2px}
   .diff.on{background:var(--gold)}
+  
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-  .tool{padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:8px;transition:transform .15s}
-  .tool:hover{transform:translateY(-2px);border-color:var(--gold)}
+  
+  /* 卡片发光交互 */
+  .tool{padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:8px;transition:all .2s ease}
+  .tool:hover{
+    transform:translateY(-2px);
+    border-color:var(--gold);
+    box-shadow: 0 4px 16px rgba(200, 160, 85, 0.15);
+  }
   .tool h4{margin:0 0 6px;font-size:15px}
   .tool p{margin:0 0 10px;color:var(--muted);font-size:13px}
   .tool .meta{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.5px}
+  
   .video-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
-  .video{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:transform .15s,border-color .15s}
-  .video:hover{transform:translateY(-2px);border-color:var(--gold)}
-  .video a.thumb{display:block;aspect-ratio:16/9;position:relative;background:#000 center/cover no-repeat;text-decoration:none}
-  .video a.thumb::after{
-    content:"▶";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    color:#fff;font-size:38px;background:rgba(0,0,0,.25);transition:background .15s
+  .video{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:all .2s ease}
+  .video:hover{
+    transform:translateY(-2px);
+    border-color:var(--gold);
+    box-shadow: 0 4px 16px rgba(200, 160, 85, 0.15);
   }
-  .video a.thumb:hover::after{background:rgba(0,0,0,.1)}
+  .video a.thumb{display:block;aspect-ratio:16/9;position:relative;background:#000 center/cover no-repeat;text-decoration:none}
+  
+  /* 优化后的 SVG 播放按钮 */
+  .video a.thumb::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 0.2s ease;
+    opacity: 0.8;
+  }
+  .video a.thumb:hover::after{
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  
   .video .badge{
     position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.8);color:#fff;
     font-size:11px;padding:2px 6px;border-radius:3px;z-index:1
@@ -66,12 +147,25 @@
   .video h4 a{color:var(--text)}
   .video h4 a:hover{color:var(--gold);text-decoration:none}
   .video .by{font-size:12px;color:var(--muted)}
+  
   details{border:1px solid var(--line);border-radius:6px;margin-bottom:8px;background:var(--panel)}
   details[open]{border-color:var(--gold)}
   summary{padding:14px 16px;cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;align-items:center}
   summary::after{content:"+";color:var(--gold);font-size:18px}
   details[open] summary::after{content:"−"}
-  details p{margin:0;padding:0 16px 16px;color:var(--muted);font-size:14px}
+  
+  /* FAQ 下拉渐显动画 */
+  details p{
+    margin:0;
+    padding:0 16px 16px;
+    color:var(--muted);
+    font-size:14px;
+    animation: fadeInDown 0.3s ease-out;
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   /* LGS 定位器 */
   .lgs-box{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
@@ -100,8 +194,6 @@
   footer{padding:24px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:40px}
   @media(max-width:640px){
     header h1{font-size:26px}
-    table{font-size:13px}
-    th,td{padding:8px 6px}
   }
 </style>
 </head>
@@ -114,7 +206,7 @@
     <span><b>①</b> Read the FAQ</span>
     <span><b>②</b> Pick a precon</span>
     <span><b>③</b> Find your LGS</span>
-    <span><b>④</b> Play online &amp; learn</span>
+    <span><b>④</b> Play online & learn</span>
   </div>
 </header>
 
@@ -130,7 +222,6 @@
 
 <main>
 
-<!-- FAQ -->
 <section id="faq">
   <h2>Beginner FAQ</h2>
   <p class="lead">Five questions almost every new player asks. Answers follow the official Core Rules and the March 2026 tournament update.</p>
@@ -152,7 +243,7 @@
 
   <details>
     <summary>Can I play online without a local opponent?</summary>
-    <p>Yes. Community tools like Riftscribe, RiftCore, and the Riftbot Discord bot cover card databases, deckbuilding, and match tracking. Runes &amp; Rift runs free weekly online tournaments every Saturday. There's no official client yet, but between Tabletop Simulator and community platforms the online scene is already mature.</p>
+    <p>Yes. Community tools like Riftscribe, RiftCore, and the Riftbot Discord bot cover card databases, deckbuilding, and match tracking. Runes & Rift runs free weekly online tournaments every Saturday. There's no official client yet, but between Tabletop Simulator and community platforms the online scene is already mature.</p>
   </details>
 
   <details>
@@ -161,11 +252,11 @@
   </details>
 </section>
 
-<!-- DECKS -->
 <section id="decks">
   <h2>Preconstructed Deck Comparison</h2>
   <p class="lead">Seven official Champion Decks side by side, sorted from most beginner-friendly to most demanding. More dots means higher complexity.</p>
-  <div class="card" style="padding:0;overflow-x:auto">
+  
+  <div class="card table-wrapper">
     <table>
       <thead>
         <tr>
@@ -232,7 +323,6 @@
   <p style="color:var(--muted);font-size:13px;margin-top:12px">Data compiled from the Eneba Starter Guide, TCGplayer's November 2025 Tier article, and Rift Mana decklists. Always check Riot Merch Store, TCGplayer, or your local game store for current pricing and availability.</p>
 </section>
 
-<!-- LGS -->
 <section id="lgs">
   <h2>Local Game Store Locator</h2>
   <p class="lead">Click the button below to auto-detect your location and find the nearest Riftbound store. No account or API key required.</p>
@@ -268,9 +358,8 @@
   </div>
 </section>
 
-<!-- ONLINE -->
 <section id="online">
-  <h2>Online Play &amp; Community Tools</h2>
+  <h2>Online Play & Community Tools</h2>
   <p class="lead">Curated from the rift.tools community directory — covering deckbuilding, rulings, collection tracking, and tournaments.</p>
   <div class="grid">
     <div class="tool">
@@ -290,7 +379,7 @@
     </div>
     <div class="tool">
       <div class="meta">Online Tournaments</div>
-      <h4><a href="https://runesandrift.com" target="_blank" rel="noopener">Runes &amp; Rift</a></h4>
+      <h4><a href="https://runesandrift.com" target="_blank" rel="noopener">Runes & Rift</a></h4>
       <p>Free weekly Saturday tournaments, monthly Cash Cups, and seasonal Invitationals — open to newcomers.</p>
     </div>
     <div class="tool">
@@ -306,7 +395,6 @@
   </div>
 </section>
 
-<!-- VIDEOS -->
 <section id="videos">
   <h2>YouTube Video Guides</h2>
   <p class="lead">From a 15-minute rules crash course to prerelease card picks, ordered in the sequence we recommend watching. Click a thumbnail to open the video on YouTube.</p>
@@ -401,17 +489,6 @@
 </footer>
 
 <script>
-  // 平滑滚动
-  document.querySelectorAll('nav a').forEach(a => {
-    a.addEventListener('click', e => {
-      const id = a.getAttribute('href');
-      if (id.startsWith('#')) {
-        e.preventDefault();
-        document.querySelector(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-
   // LGS 自动定位
   function locateUser() {
     const btn     = document.getElementById('locateBtn');
@@ -453,9 +530,9 @@
         status.textContent  = '';
         btn.textContent     = '✓ Location detected';
 
-        // 拼接官方定位器 URL（带坐标参数）
+        // 拼接官方定位器 URL（带坐标参数）和修复后的 Google Maps 标准搜索链接
         const locatorUrl = `https://locator.riftbound.uvsgames.com/stores/search?lat=${lat}&lng=${lng}`;
-        const mapsUrl    = `https://www.google.com/maps/search/card+game+store/@${lat},${lng},13z`;
+        const mapsUrl    = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
 
         actions.innerHTML = `
           <a class="primary" href="${locatorUrl}" target="_blank" rel="noopener">
@@ -472,7 +549,7 @@
         btn.disabled = false;
         btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="9" opacity=".3"/></svg> Find Stores Near Me`;
         const msgs = {
-          1: 'Location permission denied. Use the manual links below to search.'，
+          1: 'Location permission denied. Use the manual links below to search.',
           2: 'Location unavailable. Please try again or use the manual links.',
           3: 'Location request timed out. Please try again.'
         };
@@ -486,4 +563,3 @@
 
 </body>
 </html>
-
